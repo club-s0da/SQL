@@ -89,3 +89,10 @@ SELECT COUNT(DISTINCT cust.acctnum),
  WHERE feb.quantity > 2 AND 
        length(order_id) = 6 AND 
        order_id <> 'Order ID';
+
+--#Q8: List all the products sold in Los Angeles in February, and include how many of each were sold.
+SELECT Product,
+       sum(Quantity) 
+  FROM BIT_DB.FebSales
+ WHERE location LIKE '%Los Angeles%'
+ GROUP BY Product;
