@@ -112,3 +112,36 @@ SELECT sum(quantity) AS Quantity,
   FROM BIT_DB.FebSales
  WHERE Product LIKE '%headphone%'
  GROUP BY Product;
+
+-- #Q11: What was the average amount spent per account in February?
+-- Note to self: no GROUP BY statement even tho contains aggregation bc we are looking for one value anyway (singular aggregation).
+SELECT acctnum,
+       sum(quantity * price) / count(acctnum) AS [Avg Spending per Account]
+  FROM BIT_DB.FebSales feb
+       LEFT JOIN
+       BIT_DB.customers cust ON feb.orderID = cust.order_ID
+ WHERE length(order_id) = 6 AND 
+       order_id <> 'Order ID';
+-- alternatively:
+SELECT avg(quantity * price) 
+  FROM BIT_DB.FebSales feb
+       LEFT JOIN
+       BIT_DB.customers cust ON feb.orderID = cust.order_ID
+ WHERE length(order_id) = 6 AND 
+       order_id <> 'Order ID';
+       
+-- #Q12: What was the average quantity of products purchased per account in February?
+SELECT sum(quantity) / count(acctnum) AS avgQuantityPerAcct
+  FROM BIT_DB.FebSales feb
+       LEFT JOIN
+       BIT_DB.customers cust ON feb.orderID = cust.order_ID
+ WHERE length(order_id) = 6 AND 
+       order_id <> 'Order ID';
+
+ -- #Q13: Which product brought in the most revenue in Janurary and how much revenue did it bring in total?
+SELECT Product,
+       sum(quantity * price) AS revenue
+  FROM BIT_DB.JanSales
+ GROUP BY Product
+ ORDER BY revenue DESC
+ LIMIT 1;
