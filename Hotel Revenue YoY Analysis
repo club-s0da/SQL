@@ -1,11 +1,14 @@
 /** 
-This analysis aims to provide an overview to calculate revenue by month and year over year analyses by month.
-It also organizes the data by hotel type and distribution channel to calculate greatest revenue driver.
-This is hotel data, July 2018 to August 2020 a two-year span, sourced from Kaggle.
+This analysis aims to provide an overview by calculate revenue by month and year over year analyses by month.
+It also organizes the data by hotel type and distribution channel to uncover greatest revenue driver.
+This is hotel data July 2018 to August 2020 a two-year span, sourced from Kaggle.
 Analyses performed in PostgreSQL
 **/
 
---create the 3 tables for 3 years of the hotel data: 2018, 2019, 2020 (2019&2020 not shown)
+--create the 5 tables: 
+--3 tables for hotel revenue per each year, 1 table for market segment discount data and 1 table for meal pricing data
+
+1. create the 3 tables for 3 years of the hotel data: 2018, 2019, 2020 (2019&2020 not shown)
 create table hotel18 (
 	 hotel varchar(255)
 	,is_cancelled smallint
@@ -41,19 +44,20 @@ create table hotel18 (
 	,reservation_status_date date
 );
 
---create table for market segment discounts:
+2. create table for market segment discounts:
 create table market_seg (
 	 discount numeric
 	,market_segment varchar(255)
 );
 
---create table for meal pricing:
+3. create table for meal pricing:
 create table meal_cost (
 	 meal_price
 	,meal_type
 );
 
---Analyses:
+4. Analyses:
+
 --Intention 1: Revenue for completed stays
 with hotels as (
 	select * from hotel18
@@ -65,7 +69,7 @@ union all
 select
 	 h.arrival_date_year
 	,h.hotel
-	--,h.distribution_channel
+	,h.distribution_channel
 	,round(sum((h.stays_in_weekend_nights + h.stays_in_week_nights)*(h.adr*(1-ms.discount))
 	+(h.stays_in_weekend_nights + h.stays_in_week_nights)*mc.meal_price)) as revenue
 from
@@ -77,7 +81,7 @@ left join
 group by
 	 h.arrival_date_year
 	,h.hotel
-	--,h.distribution_channel
+	,h.distribution_channel
 	--,h.is_cancelled = false
 	,h.reservation_status ilike lower('%check-out%')
 having
@@ -100,8 +104,8 @@ select
 	 to_date(h.arrival_date_year||' '||h.arrival_date_month, 'YYYY month') as arrival_month
 	,h.reservation_status
 	,h.deposit_type
-	--,h.hotel
-	--,h.distribution_channel
+	,h.hotel
+	,h.distribution_channel
 	,round(sum((h.stays_in_weekend_nights + h.stays_in_week_nights)*(h.adr*(1-ms.discount))
 	+(h.stays_in_weekend_nights + h.stays_in_week_nights)*mc.meal_price)) as revenue
 from
@@ -112,8 +116,8 @@ left join
 	meal_cost mc on mc.meal_type = h.meal
 group by
 	 arrival_month
-	--,h.hotel
-	--,h.distribution_channel
+	,h.hotel
+	,h.distribution_channel
 	,h.reservation_status
 	,deposit_type
 having
