@@ -1,11 +1,11 @@
-```sql
+
 /** 
 This analysis aims to provide an overview by calculate revenue by month and year over year analyses by month.
 It also organizes the data by hotel type and distribution channel to uncover greatest revenue driver.
 This is hotel data July 2018 to August 2020, a two-year span, sourced from Kaggle.
 Analyses performed in PostgreSQL
 **/
-
+```sql
 --create the 5 tables: 
 --3 tables for hotel revenue per each year, 1 table for market segment discount data and 1 table for meal pricing data
 
