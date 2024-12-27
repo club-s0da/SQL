@@ -1,3 +1,4 @@
+```sql
 --#Querying a database with multiple tables to quantify statistics about customer and order data. 
 
 --#Data cleaning: filters out rows where order id is null, blank, not 6 characters, and a specific string.
@@ -145,3 +146,4 @@ SELECT Product,
  GROUP BY Product
  ORDER BY revenue DESC
  LIMIT 1;
+```
