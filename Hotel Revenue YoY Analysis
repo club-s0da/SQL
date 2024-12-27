@@ -1,4 +1,4 @@
-```SQL
+```sql
 /** 
 This analysis aims to provide an overview by calculate revenue by month and year over year analyses by month.
 It also organizes the data by hotel type and distribution channel to uncover greatest revenue driver.
