@@ -1,3 +1,4 @@
+```sql
 #This analysis utilized the following Fortune 500 dataset:
 
 CREATE TABLE fortune_companies (
@@ -104,3 +105,5 @@ ORDER BY revenue desc;
 SELECT company_name, min(revenue)
 FROM fortune_companies
 WHERE industry = 'Technology';
+
+```
