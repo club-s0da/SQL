@@ -1,3 +1,4 @@
+```sql
 --In this SQL, I'm querying a database called chinook with multiple tables in it, which represents a digital media store and includes tables for artists, albums, media tracks, invoices, and customers.
 
 --Q1: What is the title and name of the employees to whom each employee reports?
@@ -178,3 +179,5 @@ SELECT (trackIdCount * UnitPrice) AS HighestGrossTrack,
        track
   FROM tracks_CTE
  ORDER BY highestGRosstrack DESC LIMIT 1;
+
+```
