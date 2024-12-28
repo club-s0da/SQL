@@ -1,3 +1,4 @@
+```sql
 # For this project, I downloaded Spotify data from Kaggle.
 # Then I created a table to insert Spotify data into.
 # Finally, I performed analytics on the data using SQL. 
@@ -62,3 +63,5 @@ SELECT artist_name,
        'Top Star' AS tag
   FROM popularity_average_CTE
  WHERE average_popularity >= 90;
+
+```
