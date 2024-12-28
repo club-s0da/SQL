@@ -1,3 +1,4 @@
+```sql
 #This project uses the following artificial Superstore data:
 
 CREATE TABLE superstore (
@@ -48,3 +49,4 @@ FROM superstore
 WHERE average_rating = 4.2
 GROUP BY item_name
 ORDER BY sum(stock_quantity) desc;
+```
