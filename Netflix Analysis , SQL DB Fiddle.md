@@ -1,3 +1,4 @@
+```sql
 #This project practices used Postgre dialect.
 #This project reveals insights about TV and Movie content hosted on Netflix, utilizing the following two Netflix datasets, which can also be found using this link https://www.db-fiddle.com/f/pfsdrKi9cgCDp4Wwb77AF/0:
 
@@ -88,3 +89,5 @@ WHERE title.title = 'The Starling';
 SELECT release_year, title
 FROM "netflix_titles_info"
 WHERE type = 'Movie' AND release_year <= (SELECT min(release_year) FROM "netflix_titles_info" WHERE type = 'Movie');
+
+```
